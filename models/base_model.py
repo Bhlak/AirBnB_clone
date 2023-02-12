@@ -36,7 +36,7 @@ class BaseModel:
     def to_dict(self):
         """Converts instance to dictionary format"""
         res = self.__dict__.copy()
-        res[__class__] = self.__class__.__name__
+        res['__class__'] = self.__class__.__name__
         res['created_at'] = self.created_at.isoformat()
         res['updated_at'] = self.updated_at.isoformat()
         return res
