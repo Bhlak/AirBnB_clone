@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""This model defines the base class for all models in the HBNB clone project"""
+"""Defines the base class for all models in the HBNB clone project"""
 
 import uuid
 from datetime import datetime
+
 
 class BaseModel:
     """
@@ -10,7 +11,7 @@ class BaseModel:
     Attributes:
         id(string) - unique id of each BaseModel.
         created_at(datetime) - Current Datetime when instance was created
-        updated_at(datetime) - Datetime of last update to object    
+        updated_at(datetime) - Datetime of last update to object
     """
     def __init__(self, *args, **kwargs):
         """Inititalizes an instance of BaseModel"""
@@ -32,7 +33,7 @@ class BaseModel:
     def save(self):
         """Updates 'updated_at' attribute with current datetime"""
         self.updated_at = datetime.now()
-    
+
     def to_dict(self):
         """Converts instance to dictionary format"""
         res = self.__dict__.copy()
