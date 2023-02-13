@@ -15,7 +15,9 @@ class FileStorage:
 
     def new(self, obj):
         """Sets object into '__objects'."""
-        self.__objects.update({obj.to_dict()['__class__'] + '.' + obj.id : obj})
+        self.all().update(
+            {obj.to_dict()['__class__'] + '.' + obj.id : obj}
+            )
 
     def save(self):
         """Saves objects to a file in json format"""
@@ -36,6 +38,6 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 tmp = json.load(f)
                 for key, val in tmp.items():
-                    self.__objects[key] = BaseModel(**val)
+                    self.all()[key] = BaseModel(**val)
         except FileNotFoundError:
             pass
