@@ -16,7 +16,7 @@ class FileStorage:
     def new(self, obj):
         """Sets object into '__objects'."""
         self.all().update(
-            {obj.to_dict()['__class__'] + '.' + obj.id : obj}
+            {obj.to_dict()['__class__'] + '.' + obj.id: obj}
             )
 
     def save(self):
@@ -31,7 +31,6 @@ class FileStorage:
     def reload(self):
         """Unloads objects from a json file"""
         from models.base_model import BaseModel
-
 
         try:
             tmp = {}
