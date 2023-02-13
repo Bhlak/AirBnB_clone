@@ -11,13 +11,31 @@ class FileStorage:
 
     def all(self):
         """Returns the dictionary __objects"""
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """Sets object into '__objects'."""
-        FileStorage.__objects.update({obj.to_dict()['__class__'] + '.' + obj.id : obj})
+        self.__objects.update({obj.to_dict()['__class__'] + '.' + obj.id : obj})
 
     def save(self):
-        """Saves storage"""
-        with open(FileStorage.__file_path, 'w') as f:
-            json.dumps(FileStorage.__objects, f)
+        """Saves objects to a file in json format"""
+        with open(self.__file_path, 'w') as f:
+            tmp = {}
+            tmp = self.__objects
+            for k, v in tmp.items():
+                tmp[k] = val.to_dict()
+            json.dump(tmp, f)
+
+    def reload(self):
+        """Unloads objects from a json file"""
+        from models.base_model import BaseModel
+
+
+        try:
+            tmp = {}
+            with open(self.__file_path, 'r') as f:
+                tmp = json.load(f)
+                for key, val in tmp.items():
+                    self.__objects[key] = BaseModel(**val)
+        except FileNotFoundError:
+            pass
