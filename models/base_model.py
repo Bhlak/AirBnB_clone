@@ -37,7 +37,7 @@ class BaseModel:
         of the instance
         """
         dicto = self.__dict__.copy()
-        dicto[__class__] = self.__class__.__name__
+        dicto['__class__'] = self.__class__.__name__
         for k, v in self.__dict__.items():
             if k in ['created_at', 'updated_at']:
                 v = v.isoformat()
